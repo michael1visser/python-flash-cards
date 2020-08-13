@@ -48,8 +48,8 @@ cards = [
         "english": "perro"
     },
     {
-        "spanish": "cat",
-        "english": "gato"
+        "spanish": "gato",
+        "english": "cat"
     },
     {
         "spanish": "pez",

@@ -35,9 +35,12 @@ def start_app():
 
 
 # INITIALIZE GAME
-def game_setup():
+def game_setup():        
+    
     global round
-    user_count = input(f"\nHow many cards would you like to play with?\n")
+    user_count = input("\nHow many cards would you like to play with?\n")
+    user_lang = input("\nWould you like to guess Spanish or English?\n").lower() 
+    
     round += 1
     query = list(Cards.select().order_by(fn.Random()).limit(user_count))
 
@@ -54,17 +57,22 @@ def game_setup():
     game_deck = list(map(create_card ,query))
     
 
-    play_game(game_deck)
+    play_game(game_deck, user_lang)
 
 #PLAY A ROUND OF THE GAME
-def play_game(deck):
+def play_game(deck, lang):
     correct = 0
     incorrect = 0
 
-    for i in range(0, len(deck)):
-        guess = input(f"How do you say {deck[i]['english']} in Spanish?\n")
+    if lang == 'english':
+        lang2 = 'spanish'
+    else:
+        lang2 = 'english'
 
-        if guess == deck[i]['spanish']:
+    for i in range(0, len(deck)):
+        guess = input(f"How do you say {deck[i][lang2]} in {lang}?\n")
+
+        if guess == deck[i][lang]:
             correct += 1
             deck[i]['correct'] += 1
             print("Correct!\n")
@@ -72,7 +80,7 @@ def play_game(deck):
             incorrect += 1
             deck[i]['incorrect'] += 1
             print(
-                f"Incorrect! The correct answer is {deck[i]['spanish']}.\nYou've missed this question {deck[i]['incorrect']} times this game.\n")
+                f"Incorrect! The correct answer is {deck[i][lang]}.\nYou've missed this question {deck[i]['incorrect']} times this game.\n")
 
     end_round(correct, incorrect, deck)  
 

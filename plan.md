@@ -155,4 +155,4 @@ delete_card()
 4. Seed Database DONE
 5. Set Up Game play functions DONE
 6. Set up CUD functions. DONE
-7. Add game vs manage functions.
+7. Add game vs manage functions. DONE
