@@ -120,7 +120,7 @@ def edit_card():
         card.english = new_value
 
     card.save()
-
+    print(f"Success! card {card.id} has been updated with the new word {new_value} \n")
 
 choose_task()
 #game_setup()
