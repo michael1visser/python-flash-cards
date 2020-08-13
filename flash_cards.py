@@ -13,13 +13,17 @@ class Cards(BaseModel):
 
 round = 0
 
+
+
 def game_setup():
     global round
     user_count = input(f"How many cards would you like to play with?\n")
     round += 1
     game_deck = Cards.select().order_by(fn.Random()).limit(user_count)
-    print(game_deck[4].spanish)
+
+    for i in range(0, len(game_deck)):
+        game_deck[i]['correct'] = 0
+        game_deck[i]['incorrect'] = 0
+    
 
 game_setup()
-
-
