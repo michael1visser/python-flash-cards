@@ -93,7 +93,7 @@ shuffle_deck()
 
 play_game() - 
     itterate over list of cards with for loop with max of total number of cards.
-        show Spanish and prompt for English
+        show English and prompt for Spanish
         if answer is correct, display correct message, increment correct count. 
         if answer is incorrect, display message with correct answer, increment incorrect count.
         clear screen.
