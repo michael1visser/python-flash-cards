@@ -122,5 +122,13 @@ def edit_card():
     card.save()
     print(f"Success! card {card.id} has been updated with the new word {new_value} \n")
 
+def delete_card():
+    to_be_deleted = input("Please input the spanish word for the card to delete:\n")
+
+    card = Cards.get(Cards.spanish == to_be_deleted)
+    card.delete_instance()
+    print("Success, the card has been deleted.")
+
+
 choose_task()
 #game_setup()
