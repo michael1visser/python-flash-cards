@@ -18,19 +18,20 @@ round = 0
 #START THE PROGRAM
 
 def start_app(): 
-    print("Welcome to Spanish Vocabulary Flash Cards!\n")
-    play_or_manage = ""
 
     def get_input():
         play_or_manage = input(f"Would you like to play a game or manage the cards?\nEnter 'play' to play a game or 'manage' to manage the cards:")
 
-    if play_or_manage == 'play':
-        game_setup()
-    elif play_or_manage == 'manage':
-        choose_task()
-    else:
-        print("Invalid input, please try again.\n")
-        get_input()
+        if play_or_manage == 'play':
+            game_setup()
+        elif play_or_manage == 'manage':
+            choose_task()
+        else:
+            print("Invalid input, please try again.\n")
+            get_input()
+
+    print("Welcome to Spanish Vocabulary Flash Cards!\n")
+    get_input()    
 
 
 # INITIALIZE GAME
@@ -155,12 +156,11 @@ def delete_card():
 
 def stay_or_go(callback):
 
-    stay_go = input("Would you like to make another update to the cards? (y/n)\n")x
+    stay_go = input("Would you like to make another update to the cards? (y/n)\n")
    
     if stay_go == 'y' or stay_go == 'yes':
         callback()
     elif stay_go == 'n' or stay_go == 'no':
         start_app()
 
-choose_task()
-#game_setup()
+start_app()
