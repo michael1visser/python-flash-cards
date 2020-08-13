@@ -58,7 +58,6 @@ def game_setup():
 
 #PLAY A ROUND OF THE GAME
 def play_game(deck):
-    print(len(deck))
     correct = 0
     incorrect = 0
 
@@ -109,7 +108,7 @@ def reset():
 
 #SET TASK TYPE
 def choose_task():
-    task= input("\nWhat would you like to do?\nTo create a new card, enter 'create'.\nTo edit an existing card, enter 'edit'.\nTo delete a card, enter 'delete'.\n")
+    task= input("\nWhat would you like to do?\nTo create a new card, enter 'create'.\nTo edit an existing card, enter 'edit'.\nTo delete a card, enter 'delete'.\nTo return to the main screen, enter 'home'.\n")
     
     if task == 'create':
         create_card()
@@ -117,6 +116,8 @@ def choose_task():
         edit_card()
     elif task == 'delete':
         delete_card()
+    elif task == 'home':
+        start_app()
     else:
         print("Invalid entry, please try again. ")
         choose_task()
