@@ -80,14 +80,13 @@ MANAGE
     input for number of cards. 
     increment round number
     query db for count of cards.
-    create list with 1-total number of cards.
+    create list with total number of cards.
     run randomize_deck() against input list 
-    create list using first x numbers.
-    query db for cards matching ids in list.
+    UPDATE - use built in random function in peewee to pull initial deck
     add correct/incorrect keys to cards
     run play_game()
 
-randomize_deck() 
+shuffle_deck() 
     accept list as arg
     randomize list order and 
     return new list

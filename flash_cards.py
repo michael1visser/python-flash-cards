@@ -17,7 +17,9 @@ def game_setup():
     global round
     user_count = input(f"How many cards would you like to play with?\n")
     round += 1
-    deck_count = Cards.select().count()
-    print(f"User count is: {user_count}, Decck count is: {deck_count}")
+    game_deck = Cards.select().order_by(fn.Random()).limit(user_count)
+    print(game_deck[4].spanish)
 
 game_setup()
+
+
