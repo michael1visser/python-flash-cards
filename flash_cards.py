@@ -81,7 +81,7 @@ def end_round(correct, incorrect, game_deck):
     global round
     print(f"Game over! in round {round} you got {correct} correct and missed {incorrect}.\n")
     end_choice = input("If you would like to play again with this deck, enter 'replay'.\n\
-If you would like to return to the home screent, enter 'home.\n")
+If you would like to return to the home screen, enter 'home.\n")
 
     if end_choice == 'replay':
         round += 1
@@ -126,11 +126,7 @@ def create_card():
     new_card = Cards(spanish=spanish, english=english)
     new_card.save()
     print(f"Success! the new card is id:{Cards.get(Cards.spanish == spanish)}\n")
-    stay_or_go = input("Would you like to make another update to the cards? (y/n)\n")
-    if stay_or_go == 'y' or stay_or_go == 'yes':
-        choose_task()
-    elif stay_or_go == 'n' or stay_or_go == 'no':
-        start_app()
+    stay_or_go(choose_task)
 
 #EDIT A CARD
 def edit_card():
@@ -146,6 +142,7 @@ def edit_card():
 
     card.save()
     print(f"Success! card {card.id} has been updated with the new word {new_value} \n")
+    stay_or_go(choose_task)
 
 #DELETE A CARD
 def delete_card():
@@ -154,7 +151,16 @@ def delete_card():
     card = Cards.get(Cards.spanish == to_be_deleted)
     card.delete_instance()
     print("Success, the card has been deleted.")
+    stay_or_go(choose_task)
 
+def stay_or_go(callback):
+
+    stay_go = input("Would you like to make another update to the cards? (y/n)\n")x
+   
+    if stay_go == 'y' or stay_go == 'yes':
+        callback()
+    elif stay_go == 'n' or stay_go == 'no':
+        start_app()
 
 choose_task()
 #game_setup()
