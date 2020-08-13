@@ -14,6 +14,25 @@ class Cards(BaseModel):
 
 round = 0
 
+
+#START THE PROGRAM
+
+def start_app(): 
+    print("Welcome to Spanish Vocabulary Flash Cards!\n")
+    play_or_manage = ""
+
+    def get_input():
+        play_or_manage = input(f"Would you like to play a game or manage the cards?\nEnter 'play' to play a game or 'manage' to manage the cards:")
+
+    if play_or_manage == 'play':
+        game_setup()
+    elif play_or_manage == 'manage':
+        choose_task()
+    else:
+        print("Invalid input, please try again.\n")
+        get_input()
+
+
 # INITIALIZE GAME
 def game_setup():
     global round
@@ -80,7 +99,7 @@ def randomize_deck(game_deck):
 def reset():
     global round
     round = 0
-    game_setup()
+    start_app()
 
 
 #CRUD
@@ -107,7 +126,13 @@ def create_card():
     new_card = Cards(spanish=spanish, english=english)
     new_card.save()
     print(f"Success! the new card is id:{Cards.get(Cards.spanish == spanish)}\n")
+    stay_or_go = input("Would you like to make another update to the cards? (y/n)\n")
+    if stay_or_go == 'y' or stay_or_go == 'yes':
+        choose_task()
+    elif stay_or_go == 'n' or stay_or_go == 'no':
+        start_app()
 
+#EDIT A CARD
 def edit_card():
     to_be_edited = input("Please input the spanish word for the card to edit:\n")
     s_or_e = input("Would you like to edit the Spanish or English?\nEnter 'spanish' or 'english'.\n")
@@ -122,6 +147,7 @@ def edit_card():
     card.save()
     print(f"Success! card {card.id} has been updated with the new word {new_value} \n")
 
+#DELETE A CARD
 def delete_card():
     to_be_deleted = input("Please input the spanish word for the card to delete:\n")
 

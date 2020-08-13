@@ -72,7 +72,7 @@ MANAGE
 
 * FUNCTION
 
-  start_game() 
+  start_app() 
     input for play/manage. 
     conditional to determine whether to run game_setup() or choose_task()
 
@@ -154,5 +154,5 @@ delete_card()
 3. Create Data DONE
 4. Seed Database DONE
 5. Set Up Game play functions DONE
-6. Set up CUD functions.
+6. Set up CUD functions. DONE
 7. Add game vs manage functions.
