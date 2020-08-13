@@ -99,5 +99,14 @@ def choose_task():
         print("Invalid entry, please try again. ")
         choose_task()
 
+#CREATE A NEW CARD
+def create_card():
+    spanish = input(f"Enter the word in Spanish:\n")
+    english = input(f"Enter the translation in English:\n")
+
+    new_card = Cards(spanish=spanish, english=english)
+    new_card.save()
+    print(f"Success! the new card is number {Cards.get(Cards.spanish == spanish)}\n")
+
 choose_task()
 #game_setup()
