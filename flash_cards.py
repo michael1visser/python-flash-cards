@@ -24,10 +24,10 @@ def start_app():
     while True:
         play_or_manage = input(f"Would you like to play a game or manage the cards?\nEnter 'play' to play a game or 'manage' to manage the cards: ")
 
-        if play_or_manage == 'play' or play_or_manage == 'manage':
+        if play_or_manage in ['play', 'manage']:
             break
         else:
-            print("Invalid entry, please try again.") 
+            print("\nInvalid entry, please try again.") 
 
     if play_or_manage == 'play':
         game_setup()
@@ -45,7 +45,7 @@ def game_setup():
     while True:
         user_lang = input("Would you like to guess Spanish or English?\n").lower() 
 
-        if user_lang == 'english' or user_lang == 'spanish':
+        if user_lang in ['english', 'spanish']:
             break
         else:
             print("\nInvalid entry, please try again.")
@@ -104,7 +104,7 @@ def end_round(correct, incorrect, game_deck, lang):
         end_choice = input("If you would like to play again with this deck, enter 'replay'.\n\
 If you would like to return to the home screen, enter 'home.\n")
 
-        if end_choice == 'replay' or end_choice == 'home':
+        if end_choice in ['replay', 'home']:
             break
         else:
             print("\nInvalid entry, please try again.")
@@ -162,9 +162,9 @@ def edit_card():
     to_be_edited = input("\nPlease input the Spanish word for the card to edit:\n")
     
     while True:
-         s_or_e = input("Would you like to edit the Spanish or English?\n").lower()
+        s_or_e = input("Would you like to edit the Spanish or English?\n").lower()
 
-        if s_or_e == 'spanish' or s_or_e == 'english':
+        if s_or_e in ['spanish', 'english']:
             break
         else:
             print("\nInvalid entry, please try again.")
@@ -191,9 +191,16 @@ def delete_card():
     stay_or_go(choose_task)
 
 def stay_or_go(callback):
-
-    stay_go = input("Would you like to make another update to the cards? (y/n)\n")
+    
    
+    while True:
+        stay_go = input("Would you like to make another update to the cards? (y/n)\n")
+
+        if stay_go in ['yes', 'y', 'no', 'n']:
+            break
+        else:
+            print("\nInvalid entry, please try again.")
+
     if stay_go == 'y' or stay_go == 'yes':
         callback()
     elif stay_go == 'n' or stay_go == 'no':
