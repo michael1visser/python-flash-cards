@@ -48,19 +48,19 @@ def play_game(deck):
         if guess == deck[i]['spanish']:
             correct += 1
             deck[i]['correct'] += 1
-            print("Correct!\n\n")
+            print("Correct!\n")
         else:
             incorrect += 1
             deck[i]['incorrect'] += 1
             print(
-                f"Incorrect! The correct answer is {deck[i]['spanish']}.\n")
+                f"Incorrect! The correct answer is {deck[i]['spanish']}.\nYou've missed this question {deck[i]['incorrect']} times this game.\n")
 
     end_round(correct, incorrect, deck)  
 
 #END THE ROUND AND CHOOSE TO PLAY AGAIN/RESET
 def end_round(correct, incorrect, game_deck):
     global round
-    print(f"Game over! You got {correct} correct and missed {incorrect}.\n")
+    print(f"Game over! in round {round} you got {correct} correct and missed {incorrect}.\n")
     end_choice = input("If you would like to play again with this deck, enter 'replay'.\n\
 If you would like to return to the home screent, enter 'home.\n")
 
