@@ -20,7 +20,7 @@ round = 0
 def start_app(): 
 
     def get_input():
-        play_or_manage = input(f"Would you like to play a game or manage the cards?\nEnter 'play' to play a game or 'manage' to manage the cards:")
+        play_or_manage = input(f"Would you like to play a game or manage the cards?\nEnter 'play' to play a game or 'manage' to manage the cards: ")
 
         if play_or_manage == 'play':
             game_setup()
@@ -30,14 +30,14 @@ def start_app():
             print("Invalid input, please try again.\n")
             get_input()
 
-    print("Welcome to Spanish Vocabulary Flash Cards!\n")
+    print("\n********************************************\n*Welcome to Spanish Vocabulary Flash Cards!*\n********************************************\n")
     get_input()    
 
 
 # INITIALIZE GAME
 def game_setup():
     global round
-    user_count = input(f"How many cards would you like to play with?\n")
+    user_count = input(f"\nHow many cards would you like to play with?\n")
     round += 1
     query = list(Cards.select().order_by(fn.Random()).limit(user_count))
 
@@ -77,6 +77,7 @@ def play_game(deck):
 
     end_round(correct, incorrect, deck)  
 
+
 #END THE ROUND AND CHOOSE TO PLAY AGAIN/RESET
 def end_round(correct, incorrect, game_deck):
     global round
@@ -90,6 +91,7 @@ If you would like to return to the home screen, enter 'home.\n")
         play_game(game_deck)
     elif end_choice == 'home':
         reset()
+
 
 #RANDOMIZE THE EXISTING DECK
 def randomize_deck(game_deck):
@@ -107,7 +109,7 @@ def reset():
 
 #SET TASK TYPE
 def choose_task():
-    task= input("What would you like to do?\nTo create a new card, enter 'create'.\nTo edit an existing card, enter 'edit'.\nTo delete a card, enter 'delete'.\n")
+    task= input("\nWhat would you like to do?\nTo create a new card, enter 'create'.\nTo edit an existing card, enter 'edit'.\nTo delete a card, enter 'delete'.\n")
     
     if task == 'create':
         create_card()
@@ -121,7 +123,7 @@ def choose_task():
 
 #CREATE A NEW CARD
 def create_card():
-    spanish = input(f"Enter the word in Spanish:\n")
+    spanish = input(f"\nEnter the word in Spanish:\n")
     english = input(f"Enter the translation in English:\n")
 
     new_card = Cards(spanish=spanish, english=english)
@@ -131,7 +133,7 @@ def create_card():
 
 #EDIT A CARD
 def edit_card():
-    to_be_edited = input("Please input the spanish word for the card to edit:\n")
+    to_be_edited = input("\nPlease input the spanish word for the card to edit:\n")
     s_or_e = input("Would you like to edit the Spanish or English?\nEnter 'spanish' or 'english'.\n")
     new_value = input("Please enter the new word:\n")
     
@@ -147,7 +149,7 @@ def edit_card():
 
 #DELETE A CARD
 def delete_card():
-    to_be_deleted = input("Please input the spanish word for the card to delete:\n")
+    to_be_deleted = input("\nPlease input the spanish word for the card to delete:\n")
 
     card = Cards.get(Cards.spanish == to_be_deleted)
     card.delete_instance()
