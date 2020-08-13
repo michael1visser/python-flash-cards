@@ -106,7 +106,21 @@ def create_card():
 
     new_card = Cards(spanish=spanish, english=english)
     new_card.save()
-    print(f"Success! the new card is number {Cards.get(Cards.spanish == spanish)}\n")
+    print(f"Success! the new card is id:{Cards.get(Cards.spanish == spanish)}\n")
+
+def edit_card():
+    to_be_edited = input("Please input the spanish word for the card to edit:\n")
+    s_or_e = input("Would you like to edit the Spanish or English?\nEnter 'spanish' or 'english'.\n")
+    new_value = input("Please enter the new word:\n")
+    
+    card = Cards.get(Cards.spanish == to_be_edited)
+    if s_or_e == 'spanish':
+        card.spanish = new_value
+    elif s_or_e == 'english':
+        card.english = new_value
+
+    card.save()
+
 
 choose_task()
 #game_setup()
