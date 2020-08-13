@@ -1,4 +1,5 @@
 from peewee import *
+import random
 
 db = PostgresqlDatabase('flashcards', user="postgres", password='', host='localhost', port=5432)
 db.connect()
@@ -13,7 +14,27 @@ class Cards(BaseModel):
 
 round = 0
 
+def randomize_deck(game_deck):
+    random.shuffle(game_deck)
+    return game_deck
 
+def reset():
+    global round
+    round = 0
+    game_setup()
+
+def end_game(correct, incorrect):
+     global round
+    print(f"Game over! You got {correct} correct and missed {incorrect}.\n")
+    end_choice = input("If you would like to play again with this deck, enter 'replay'.\n\
+If you would like to return to the home screent, enter 'home.\n")
+
+    if end_choice == 'replay':
+        round += 1
+        game_deck = randomize_deck(game_deck)
+        play_game(game_deck)
+    elif end_choice == 'home':
+        reset()
 
 def play_game(deck):
     correct = 0
