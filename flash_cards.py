@@ -83,4 +83,21 @@ def reset():
     game_setup()
 
 
-game_setup()
+#CRUD
+
+#SET TASK TYPE
+def choose_task():
+    task= input("What would you like to do?\nTo create a new card, enter 'create'.\nTo edit an existing card, enter 'edit'.\nTo delete a card, enter 'delete'.\n")
+    
+    if task == 'create':
+        create_card()
+    elif task == 'edit':
+        edit_card()
+    elif task == 'delete':
+        delete_card()
+    else:
+        print("Invalid entry, please try again. ")
+        choose_task()
+
+choose_task()
+#game_setup()
