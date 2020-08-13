@@ -1,5 +1,6 @@
 from peewee import *
 import random
+import sys
 
 db = PostgresqlDatabase('flashcards', user="postgres", password='', host='localhost', port=5432)
 db.connect()
@@ -22,9 +23,9 @@ def start_app():
     print("\n********************************************\n*Welcome to Spanish Vocabulary Flash Cards!*\n********************************************\n")
 
     while True:
-        play_or_manage = input(f"Would you like to play a game or manage the cards?\nEnter 'play' to play a game or 'manage' to manage the cards: ")
+        play_or_manage = input(f"Would you like to play a game or manage the cards?\nEnter 'play' to play a game or 'manage' to manage the cards. To exit type 'exit'.\n")
 
-        if play_or_manage in ['play', 'manage']:
+        if play_or_manage in ['play', 'manage', 'exit']:
             break
         else:
             print("\nInvalid entry, please try again.") 
@@ -33,6 +34,8 @@ def start_app():
         game_setup()
     elif play_or_manage == 'manage':
         choose_task()
+    elif play_or_manage == 'exit':
+        sys.exit()
         
 
 
