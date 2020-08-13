@@ -153,7 +153,7 @@ delete_card()
 1. Set up DB DONE
 2. Create Models DONE
 3. Create Data DONE
-4. Seed Database
+4. Seed Database DONE
 5. Set Up Game play functions
 6. Set up CUD functions.
 7. Add game vs manage functions.
