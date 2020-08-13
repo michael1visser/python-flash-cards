@@ -48,7 +48,7 @@ def game_setup():
         if user_lang == 'english' or user_lang == 'spanish':
             break
         else:
-            print("Invalid entry, please try again.")
+            print("\nInvalid entry, please try again.")
 
     
     round += 1
@@ -99,8 +99,15 @@ def play_game(deck, lang):
 def end_round(correct, incorrect, game_deck, lang):
     global round
     print(f"Game over! in round {round} you got {correct} correct and missed {incorrect}.\n")
-    end_choice = input("If you would like to play again with this deck, enter 'replay'.\n\
+
+    while True:
+        end_choice = input("If you would like to play again with this deck, enter 'replay'.\n\
 If you would like to return to the home screen, enter 'home.\n")
+
+        if end_choice == 'replay' or end_choice == 'home':
+            break
+        else:
+            print("\nInvalid entry, please try again.")
 
     if end_choice == 'replay':
         round += 1
@@ -152,8 +159,16 @@ def create_card():
 
 #EDIT A CARD
 def edit_card():
-    to_be_edited = input("\nPlease input the spanish word for the card to edit:\n")
-    s_or_e = input("Would you like to edit the Spanish or English?\nEnter 'spanish' or 'english'.\n")
+    to_be_edited = input("\nPlease input the Spanish word for the card to edit:\n")
+    
+    while True:
+         s_or_e = input("Would you like to edit the Spanish or English?\n").lower()
+
+        if s_or_e == 'spanish' or s_or_e == 'english':
+            break
+        else:
+            print("\nInvalid entry, please try again.")
+
     new_value = input("Please enter the new word:\n")
     
     card = Cards.get(Cards.spanish == to_be_edited)
