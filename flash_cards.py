@@ -19,19 +19,21 @@ round = 0
 
 def start_app(): 
 
-    def get_input():
+    print("\n********************************************\n*Welcome to Spanish Vocabulary Flash Cards!*\n********************************************\n")
+
+    while True:
         play_or_manage = input(f"Would you like to play a game or manage the cards?\nEnter 'play' to play a game or 'manage' to manage the cards: ")
 
-        if play_or_manage == 'play':
-            game_setup()
-        elif play_or_manage == 'manage':
-            choose_task()
+        if play_or_manage == 'play' or play_or_manage == 'manage':
+            break
         else:
-            print("Invalid input, please try again.\n")
-            get_input()
+            print("Invalid entry, please try again.") 
 
-    print("\n********************************************\n*Welcome to Spanish Vocabulary Flash Cards!*\n********************************************\n")
-    get_input()    
+    if play_or_manage == 'play':
+        game_setup()
+    elif play_or_manage == 'manage':
+        choose_task()
+        
 
 
 # INITIALIZE GAME
@@ -41,10 +43,13 @@ def game_setup():
     user_count = input("\nHow many cards would you like to play with?\n")
 
     while True:
-        user_lang = input("\nWould you like to guess Spanish or English?\n").lower() 
+        user_lang = input("Would you like to guess Spanish or English?\n").lower() 
 
         if user_lang == 'english' or user_lang == 'spanish':
             break
+        else:
+            print("Invalid entry, please try again.")
+
     
     round += 1
     query = list(Cards.select().order_by(fn.Random()).limit(user_count))
