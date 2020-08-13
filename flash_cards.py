@@ -34,10 +34,11 @@ def game_setup():
     game_deck = list(map(create_card ,query))
     
 
-    #play_game(game_deck)
+    play_game(game_deck)
 
 #PLAY A ROUND OF THE GAME
 def play_game(deck):
+    print(len(deck))
     correct = 0
     incorrect = 0
 
@@ -52,12 +53,12 @@ def play_game(deck):
             incorrect += 1
             deck[i]['incorrect'] += 1
             print(
-                f"Incorrect! The correct answer is {deck[i]['capital']}.\n")
+                f"Incorrect! The correct answer is {deck[i]['spanish']}.\n")
 
-        end_round(correct, incorrect)  
+    end_round(correct, incorrect, deck)  
 
 #END THE ROUND AND CHOOSE TO PLAY AGAIN/RESET
-def end_round(correct, incorrect):
+def end_round(correct, incorrect, game_deck):
     global round
     print(f"Game over! You got {correct} correct and missed {incorrect}.\n")
     end_choice = input("If you would like to play again with this deck, enter 'replay'.\n\
