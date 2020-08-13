@@ -39,7 +39,12 @@ def game_setup():
     
     global round
     user_count = input("\nHow many cards would you like to play with?\n")
-    user_lang = input("\nWould you like to guess Spanish or English?\n").lower() 
+
+    while True:
+        user_lang = input("\nWould you like to guess Spanish or English?\n").lower() 
+
+        if user_lang == 'english' or user_lang == 'spanish':
+            break
     
     round += 1
     query = list(Cards.select().order_by(fn.Random()).limit(user_count))
@@ -70,7 +75,7 @@ def play_game(deck, lang):
         lang2 = 'english'
 
     for i in range(0, len(deck)):
-        guess = input(f"How do you say {deck[i][lang2]} in {lang}?\n")
+        guess = input(f"How do you say {deck[i][lang2]} in {lang.title()}?\n")
 
         if guess == deck[i][lang]:
             correct += 1
@@ -82,11 +87,11 @@ def play_game(deck, lang):
             print(
                 f"Incorrect! The correct answer is {deck[i][lang]}.\nYou've missed this question {deck[i]['incorrect']} times this game.\n")
 
-    end_round(correct, incorrect, deck)  
+    end_round(correct, incorrect, deck, lang)  
 
 
 #END THE ROUND AND CHOOSE TO PLAY AGAIN/RESET
-def end_round(correct, incorrect, game_deck):
+def end_round(correct, incorrect, game_deck, lang):
     global round
     print(f"Game over! in round {round} you got {correct} correct and missed {incorrect}.\n")
     end_choice = input("If you would like to play again with this deck, enter 'replay'.\n\
@@ -95,7 +100,7 @@ If you would like to return to the home screen, enter 'home.\n")
     if end_choice == 'replay':
         round += 1
         game_deck = randomize_deck(game_deck)
-        play_game(game_deck)
+        play_game(game_deck, lang)
     elif end_choice == 'home':
         reset()
 
