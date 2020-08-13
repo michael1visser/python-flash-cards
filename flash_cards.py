@@ -19,13 +19,22 @@ def game_setup():
     global round
     user_count = input(f"How many cards would you like to play with?\n")
     round += 1
-    game_deck = Cards.select().order_by(fn.Random()).limit(user_count)
+    query = list(Cards.select().order_by(fn.Random()).limit(user_count))
 
-    for i in range(0, len(game_deck)):
-        game_deck[i]['correct'] = 0
-        game_deck[i]['incorrect'] = 0
+    def create_card(val):
+        card = {
+            'spanish': val.spanish,
+            'english': val.english,
+            'correct': 0,
+            'incorrect': 0
+        }
+
+        return card
+
+    game_deck = list(map(create_card ,query))
     
-    play_game(game_deck)
+
+    #play_game(game_deck)
 
 #PLAY A ROUND OF THE GAME
 def play_game(deck):
@@ -49,7 +58,7 @@ def play_game(deck):
 
 #END THE ROUND AND CHOOSE TO PLAY AGAIN/RESET
 def end_round(correct, incorrect):
-     global round
+    global round
     print(f"Game over! You got {correct} correct and missed {incorrect}.\n")
     end_choice = input("If you would like to play again with this deck, enter 'replay'.\n\
 If you would like to return to the home screent, enter 'home.\n")
