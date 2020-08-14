@@ -1,6 +1,8 @@
 from peewee import *
 import random
 import sys
+import os
+import time
 
 db = PostgresqlDatabase('flashcards', user="postgres", password='', host='localhost', port=5432)
 db.connect()
@@ -15,12 +17,21 @@ class Cards(BaseModel):
 
 round = 0
 
+#CLEAR TERMINAL SCREEN
+def clear_screen():
+
+    if os.name == 'posix':
+        _ = os.system('clear')
+    else: 
+        _ = os.system('cls')
+
+
 
 #START THE PROGRAM
 
 def start_app(): 
 
-    print("\n********************************************\n*Welcome to Spanish Vocabulary Flash Cards!*\n********************************************\n")
+    print("\n**********************************************\n* Welcome to Spanish Vocabulary Flash Cards! *\n** ********************************************\n")
 
     while True:
         play_or_manage = input(f"Would you like to play a game or manage the cards?\nEnter 'play' to play a game or 'manage' to manage the cards. To exit type 'exit'.\n")
@@ -36,12 +47,15 @@ def start_app():
         choose_task()
     elif play_or_manage == 'exit':
         sys.exit()
-        
+    
+    
+    
 
 
 # INITIALIZE GAME
-def game_setup():        
-    
+def game_setup():  
+    time.sleep(.3)      
+    clear_screen()
     global round
     user_count = input("\nHow many cards would you like to play with?\n")
 
@@ -83,23 +97,26 @@ def play_game(deck, lang):
         lang2 = 'english'
 
     for i in range(0, len(deck)):
+        clear_screen()
         guess = input(f"How do you say {deck[i][lang2]} in {lang.title()}?\n")
 
         if guess == deck[i][lang]:
             correct += 1
             deck[i]['correct'] += 1
             print("Correct!\n")
+            time.sleep(3)      
         else:
             incorrect += 1
             deck[i]['incorrect'] += 1
             print(
                 f"Incorrect! The correct answer is {deck[i][lang]}.\nYou've missed this question {deck[i]['incorrect']} times this game.\n")
-
+            time.sleep(3)
     end_round(correct, incorrect, deck, lang)  
 
 
 #END THE ROUND AND CHOOSE TO PLAY AGAIN/RESET
 def end_round(correct, incorrect, game_deck, lang):
+    clear_screen()
     global round
     print(f"Game over! in round {round} you got {correct} correct and missed {incorrect}.\n")
 
@@ -136,6 +153,8 @@ def reset():
 
 #SET TASK TYPE
 def choose_task():
+    time.sleep(.1)      
+    clear_screen()
     task= input("\nWhat would you like to do?\nTo create a new card, enter 'create'.\nTo edit an existing card, enter 'edit'.\nTo delete a card, enter 'delete'.\nTo return to the main screen, enter 'home'.\n")
     
     if task == 'create':
