@@ -30,7 +30,8 @@ def clear_screen():
 #START THE PROGRAM
 
 def start_app(): 
-
+    time.sleep(.1)      
+    clear_screen()
     print("\n**********************************************\n* Welcome to Spanish Vocabulary Flash Cards! *\n** ********************************************\n")
 
     while True:
@@ -171,6 +172,8 @@ def choose_task():
 
 #CREATE A NEW CARD
 def create_card():
+    time.sleep(.1)      
+    clear_screen()
     spanish = input(f"\nEnter the word in Spanish:\n")
     english = input(f"Enter the translation in English:\n")
 
@@ -181,6 +184,8 @@ def create_card():
 
 #EDIT A CARD
 def edit_card():
+    time.sleep(.1)      
+    clear_screen()
     to_be_edited = input("\nPlease input the Spanish word for the card to edit:\n")
     
     while True:
@@ -205,15 +210,27 @@ def edit_card():
 
 #DELETE A CARD
 def delete_card():
+    time.sleep(.1)      
+    clear_screen()
     to_be_deleted = input("\nPlease input the spanish word for the card to delete:\n")
 
     card = Cards.get(Cards.spanish == to_be_deleted)
+    
+    while True:
+        confirm = input(f"Are you sure you want to delete {to_be_deleted}?(y/n)\n").lower()
+        
+        if confirm in ['y','n','yes','no']:
+            break
+        else:
+            print("\nInvalid entry, please try again.")
+
     card.delete_instance()
     print("Success, the card has been deleted.")
     stay_or_go(choose_task)
 
 def stay_or_go(callback):
-    
+    time.sleep(3)      
+    clear_screen()
    
     while True:
         stay_go = input("Would you like to make another update to the cards? (y/n)\n")
